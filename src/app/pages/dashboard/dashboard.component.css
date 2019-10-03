@@ -1,0 +1,16 @@
+.dash-card {
+  max-width: 400px;
+}
+
+mat-icon {
+  font-size: 35px;
+  color: #3f51b5;
+}
+
+.mat-card-header .mat-card-title{
+  margin-bottom:0px;
+}
+
+.mat-card-header .mat-card-title{
+  font-size: 19px;
+}

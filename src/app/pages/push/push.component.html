@@ -1,0 +1,51 @@
+<mat-card class="marginContent">
+  <div fxLayout="row">
+    <div fxFlex>
+      <mat-form-field fxFlex="30">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by header">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div fxLayout="column" fxLayoutAlign="start end">
+        <a mat-raised-button color="primary" [routerLink]="['/push/devices']" routerLinkActive="active">
+          <mat-icon>view_list</mat-icon> DEVICES
+        </a>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start end">
+        <a mat-raised-button color="primary" (click)="newNotification()">
+          <mat-icon>add</mat-icon> NEW NOTIFICATION
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="gappx">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="mat-elevation-z8" [hidden]="!isLoading">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="insertDate" matSortDisableClear
+      matSortDirection="desc">
+
+      <ng-container matColumnDef="headings.en">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Header </th>
+        <td mat-cell *matCellDef="let element"> {{element.headings.en}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contents.en">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Content </th>
+        <td mat-cell *matCellDef="let element"> {{element.contents.en}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="successful">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Successfully </th>
+        <td mat-cell *matCellDef="let element"> {{element.successful}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

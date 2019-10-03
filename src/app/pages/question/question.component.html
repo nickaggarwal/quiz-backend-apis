@@ -1,0 +1,51 @@
+<mat-card class="marginContent">
+  <div fxLayout="row">
+    <div fxFlex>
+      <mat-form-field class="paddingRight">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by question">
+      </mat-form-field>
+    </div>
+    <div fxFlex end class="example-button-row">
+      <a mat-raised-button color="primary" (click)="addQuestion()">
+        <mat-icon>add</mat-icon> NEW QUESTION
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="gappx">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="mat-elevation-z8" [hidden]="!isLoading">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="question">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Question </th>
+        <td mat-cell *matCellDef="let element"> {{element.question}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="key">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [routerLink]="[ '/question/edit-question', quizKey, element.key]">
+              EDIT
+            </button>
+            <button mat-raised-button color="warn" (click)="openDialog(element.key)">
+              DELETE
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

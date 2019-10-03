@@ -1,0 +1,48 @@
+<mat-card class="marginContent">
+  <div fxLayout="row">
+    <div fxFlex>
+      <mat-form-field fxFlex="30">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by username">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="gappx">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="mat-elevation-z8" [hidden]="!isLoading">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="insertDate" matSortDisableClear
+      matSortDirection="desc">
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

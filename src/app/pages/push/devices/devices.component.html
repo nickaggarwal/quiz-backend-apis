@@ -1,0 +1,50 @@
+<mat-card class="marginContent">
+    <div fxLayout="row">
+      <div fxFlex>
+        <mat-form-field fxFlex="30">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by device">
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="gappx">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <div class="mat-elevation-z8" [hidden]="!isLoading">
+      <table mat-table [dataSource]="dataSource" matSort matSortActive="insertDate" matSortDisableClear
+        matSortDirection="desc">
+  
+        <ng-container matColumnDef="device_model">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Device </th>
+          <td mat-cell *matCellDef="let element"> {{element.device_model}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="game_version">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>
+          <td mat-cell *matCellDef="let element"> {{element.game_version}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="ip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> IP </th>
+          <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="language">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
+          <td mat-cell *matCellDef="let element"> {{element.language}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.created_at | date}} </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card>
+  

@@ -1,0 +1,55 @@
+<div class="marginContent">
+  <mat-card>
+    <form fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100" fxFlex.gt-sm="100"
+      [formGroup]="quizForm" (ngSubmit)="onQuizFormSubmit(quizForm.value)">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>CREATE QUIZ</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field fxFlex>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Title" autocomplete="off">
+        <mat-error *ngIf="quizForm.controls.title.errors?.required">Title is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Choose Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.name">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="quizForm.controls.language.hasError('required')">Please choose a category</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Choose Language</mat-label>
+        <mat-select formControlName="language">
+          <mat-option *ngFor="let language of languages" [value]="language.name">
+            {{language.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="quizForm.controls.language.hasError('required')">Please choose a language</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Duration</mat-label>
+        <input matInput formControlName="duration" placeholder="Minute">
+        <mat-error *ngIf="quizForm.controls.duration.errors?.required">Duration is required</mat-error>
+        <mat-error *ngIf="quizForm.controls.duration.errors?.pattern">Use only number</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <textarea matInput formControlName="description" placeholder="Description" rows="5"></textarea>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="status">PUBLISH</mat-checkbox>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary">CREATE</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

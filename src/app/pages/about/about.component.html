@@ -1,0 +1,32 @@
+<div class="marginContent">
+  <mat-card>
+    <form fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100" fxFlex.gt-sm="100"
+      [formGroup]="aboutForm" (ngSubmit)="onAboutFormSubmit(aboutForm.value)">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>About Us</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field fxFlex>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Title" autocomplete="off">
+        <mat-error *ngIf="aboutForm.controls.title.errors?.required">Title is required</mat-error>
+      </mat-form-field>
+
+      <div fxFlex>
+        <app-ngx-editor height="330px" minHeight="50px" [placeholder]="'Enter text here...'" [spellcheck]="true"
+          formControlName="content">
+        </app-ngx-editor>
+        <mat-error *ngIf="aboutForm.controls.content.errors?.required">Content is required</mat-error>
+      </div>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary">
+          <mat-icon>save</mat-icon>
+          SAVE CHANGES
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,26 @@
+<div class="marginContent">
+  <mat-card>
+    <div fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100" fxFlex.gt-sm="100">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>CONTACT DETAILS</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field fxFlex>
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="contact.email" readonly>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Subject</mat-label>
+        <input matInput [(ngModel)]="contact.subject" readonly>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Content</mat-label>
+        <textarea matInput readonly>{{contact.content}}</textarea>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>

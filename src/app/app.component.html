@@ -1,0 +1,14 @@
+<mat-sidenav-container class="container">
+
+  <mat-sidenav *ngIf="isLoggedIn$ | async as isLoggedIn" #sidenav [(mode)]="over" [(opened)]="opened"
+    class="bottom-to-top sidemenu-back">
+    <app-sidemenu></app-sidemenu>
+  </mat-sidenav>
+
+  <mat-sidenav-content perfectScrollbar>
+    <app-header *ngIf="isLoggedIn$ | async as isLoggedIn" (sideNav)="getSideNav()">
+    </app-header>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

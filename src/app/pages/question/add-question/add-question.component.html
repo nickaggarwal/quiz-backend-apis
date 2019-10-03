@@ -1,0 +1,57 @@
+<div class="marginContent">
+  <mat-card>
+    <form fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100" fxFlex.gt-sm="100"
+      [formGroup]="questionForm" (ngSubmit)="onQuestionFormSubmit(questionForm.value)">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>CREATE NEW QUESTION</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field fxFlex>
+        <mat-label>Question</mat-label>
+        <input matInput formControlName="question" placeholder="Question" autocomplete="off">
+        <mat-error *ngIf="questionForm.controls.question.errors?.required">Question is required</mat-error>
+      </mat-form-field>
+
+
+
+
+      <div formArrayName="answers" fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center"
+        fxFlex="100" fxFlex.gt-sm="100">  
+        <div *ngFor="let answer of questionForm.controls.answers['controls']; let i=index">
+          <div [formGroupName]="i">
+            <div>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Answer" formControlName="answer" required>
+              </mat-form-field>
+            </div>
+
+            <button id="btn_{{i}}" type="button" mat-mini-fab color="primary" fxFlex="nogrow"
+              (click)="selectAnswerRight(i,$event)">
+              <mat-icon>check</mat-icon>
+            </button>
+
+            <button type="button" mat-mini-fab color="warn" fxFlex="nogrow"
+              *ngIf="questionForm.controls.answers.controls.length > this.defaultAnswerCount" (click)="removeAnswer(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <mat-checkbox formControlName="status">PUBLISH</mat-checkbox>
+
+      <mat-card-actions>
+        <a mat-raised-button color="primary" (click)="addAnswer()">
+          <mat-icon>add</mat-icon>ADD ANSWER
+        </a>
+        <button mat-raised-button type="submit" color="primary">CREATE</button>
+      </mat-card-actions>
+      <mat-error *ngIf="questionForm.controls.answerRight.errors?.required && submittedForm">Select correct answer</mat-error>
+    </form>
+  </mat-card>
+</div>

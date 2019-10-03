@@ -1,0 +1,48 @@
+<mat-card class="marginContent">
+  <div *ngIf="!isLoading" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="gappx">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center" *ngIf="exam">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <h2>Quiz: {{exam.quiz.title}}</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      Correct count: {{exam.correct}}
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      Wrong count: {{exam.mistake}}
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      Unanswered count: {{exam.unanswered}}
+    </div>
+  </div>
+
+  <div *ngIf="exam">
+    <div *ngFor="let question of exam.quiz.questions;let i=index">
+      <div fxLayout="row wrap">
+        <div fxLayoutAlign="start start" fxFlex="80">
+          {{i+1}}. {{question.question}}
+        </div>
+        <div fxLayoutAlign="end" fxFlex="20">
+          <mat-chip-list>
+            <mat-chip selected *ngIf="question.answered==question.answerRight && question.answered!=''">Right
+            </mat-chip>
+            <mat-chip color="secondary" selected *ngIf="question.answered==''">Unanswered
+            </mat-chip>
+            <mat-chip color="warn" selected *ngIf="question.answered!=question.answerRight  && question.answered!=''">Wrong</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+        Your Answer: {{question.answered}}<p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+        Correct Answer: {{question.answerRight}}<p>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+</mat-card>

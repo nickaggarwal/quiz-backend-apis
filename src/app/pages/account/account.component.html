@@ -1,0 +1,19 @@
+<div fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between" fxFlex="100" fxFlex.gt-sm="100"
+  class="marginContent">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Account</mat-card-title>
+    </mat-card-header>
+
+    <mat-form-field>
+      <input matInput disabled placeholder="Email" [(ngModel)]="account.email" autocomplete="off" required>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-raised-button color="warn" class="width-50" (click)="resetPassword()">
+        <mat-icon>lock</mat-icon>
+        Reset Password
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

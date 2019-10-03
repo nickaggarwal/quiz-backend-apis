@@ -1,0 +1,32 @@
+<div class="marginContent">
+  <mat-card>
+    <form fxLayout="row wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex="100" fxFlex.gt-sm="100"
+      [formGroup]="questionForm" (ngSubmit)="onQuestionFormSubmit(questionForm.value)">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>EDIT QUESTION</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field fxFlex>
+        <mat-label>Question</mat-label>
+        <input matInput formControlName="question" placeholder="Question" autocomplete="off">
+        <mat-error *ngIf="questionForm.controls.question.errors?.required">Question is required</mat-error>
+      </mat-form-field>
+
+      <div formArrayName="answers" *ngFor="let answer of questionForm.controls.answers['controls']; let i=index"
+        fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx" style="width: 50%">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Answer" formControlName="{{i}}" required>
+          <mat-icon *ngIf="correctAnswer==answer.value" matSuffix color="primary">check</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <mat-checkbox formControlName="status">PUBLISH</mat-checkbox>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary">SAVE CHANGES</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

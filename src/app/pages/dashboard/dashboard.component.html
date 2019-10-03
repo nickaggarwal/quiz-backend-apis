@@ -1,0 +1,57 @@
+<div #resizedDiv class="marginContent">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-card fxFlex="22" fxLayoutAlign="center">
+      <mat-card-header fxFlex fxLayoutAlign="center center">
+        <div mat-card-avatar>
+          <mat-icon>file_copy</mat-icon>
+        </div>
+        <mat-card-title>QUIZES: {{quizCount}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card fxFlex="22" fxLayoutAlign="center">
+      <mat-card-header fxFlex fxLayoutAlign="center center">
+        <div mat-card-avatar>
+          <mat-icon>view_list</mat-icon>
+        </div>
+        <mat-card-title>CATEGORY: {{categoryCount}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card fxFlex="22" fxLayoutAlign="center">
+      <mat-card-header fxFlex fxLayoutAlign="center center">
+        <div mat-card-avatar>
+          <mat-icon>people
+          </mat-icon>
+        </div>
+        <mat-card-title>USERS: {{userCount}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card fxFlex="22" fxLayoutAlign="center">
+      <mat-card-header fxFlex fxLayoutAlign="center center">
+        <div mat-card-avatar>
+          <mat-icon>verified_user</mat-icon>
+        </div>
+        <mat-card-title>EXAMS: {{examCount}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+  </div>
+
+  <br />
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex>
+      <h3 fxLayoutAlign="center">EXAM TRAFFIC {{currentYear}}</h3>
+      <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center">
+        <mat-spinner></mat-spinner>
+      </div>
+      <p>
+        <canvas id="chartt" *ngIf="!isLoading" #chart fxFlex baseChart width="400" height="100"
+          [datasets]="lineChartData" [labels]="lineChartLabels" [colors]="lineChartColors" [legend]="lineChartLegend"
+          [chartType]="lineChartType"></canvas>
+    </mat-card>
+  </div>
+
+</div>
